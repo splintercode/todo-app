@@ -1,0 +1,259 @@
+@import '_util';
+
+/*! 
+    https://github.com/splintercode/CoreGrid
+    MIT License http://opensource.org/licenses/MIT
+    Core Grid 1.7.1
+*/
+
+$container-width: 1100px;
+$sm-break: 33.75em;
+$md-break: 45em;
+$lg-break: 60em;
+$cols: 12;
+
+*, *:before, *:after {
+    /* Chrome 9-, Safari 5-, iOS 4.2-, Android 3-, Blackberry 7- */
+    -webkit-box-sizing: border-box;
+    /* Firefox (desktop or Android) 28- */
+    -moz-box-sizing: border-box;
+    /* Firefox 29+, IE 8+, Chrome 10+, Safari 5.1+, Opera 9.5+, iOS 5+, Opera Mini Anything, Blackberry 10+, Android 4+ */
+    box-sizing: border-box;
+}
+
+/* --- Column Set Up --- */
+.extend-col {
+    width: 100%;
+    padding: 0 8px 16px 8px;
+    float: left;
+    display: block;
+    min-height: 1px;
+}
+
+.alpha {
+    padding-left: 0;
+}
+
+.omega {
+    padding-right: 0;
+}
+
+.clearfix:after {
+    content: ".";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+}
+
+.container {
+    width: 100%;
+    max-width: $container-width;
+    margin: 0 auto;
+    padding: 0 12px;
+}
+
+.row {
+    clear: both;
+    overflow: hidden;
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+/* #region --- Contain Box wrappers --- */
+$col-width: ($container-width / 12);
+
+@for $i from 1 through $cols {
+    .col-#{$i}-#{'contain'} {
+        max-width: ($col-width * $i);
+        @extend .extend-col;
+        padding: 0;
+    }
+}
+/* #endregion */
+
+/* #region --- Extra Small Auto Grid --- */
+@for $i from 1 through $cols {
+    .col-#{$i}-#{'xs'} {
+        width: 1 * percentage($i/$cols);
+        @extend .extend-col;
+    }
+}
+
+.visible-xs, .visible {
+    display: block;
+}
+
+.hidden-xs, .hidden {
+    display: none;
+}
+/* #endregion */
+
+/* #region --- Small Auto Grid 540px and greater --- */
+@for $i from 1 through $cols {
+    .col-#{$i}-#{'sm'} {
+        @extend .extend-col;
+    }
+}
+
+@include respond-min($sm-break) {
+    @for $i from 1 through $cols {
+        .col-#{$i}-#{'sm'} {
+            width: 1 * percentage($i/$cols);
+        }
+    }
+
+    .visible-sm {
+        display: block;
+    }
+
+    .hidden-sm {
+        display: none;
+    }
+}
+/* #endregion */
+
+/* #region --- Primary Medium Auto Grid 720px and greater --- */
+@for $i from 1 through $cols {
+    .col-#{$i}-#{'md'}, .col-#{$i} {
+        @extend .extend-col;
+    }
+}
+
+@include respond-min($md-break) {
+    @for $i from 1 through $cols {
+        .col-#{$i}-#{'md'}, .col-#{$i} {
+            width: 1 * percentage($i/$cols);
+        }
+    }
+
+    .visible-md {
+        display: block;
+    }
+
+    .hidden-md {
+        display: none;
+    }
+}
+/* #endregion */
+
+/* #region --- Large Auto Grid 960px and greater --- */
+@for $i from 1 through $cols {
+    .col-#{$i}-#{'lg'} {
+        @extend .extend-col;
+    }
+}
+
+@include respond-min($lg-break) {
+    @for $i from 1 through $cols {
+        .col-#{$i}-#{'lg'} {
+            width: 1 * percentage($i/$cols);
+        }
+    }
+
+    .visible-lg {
+        display: block;
+    }
+
+    .hidden-lg {
+        display: none;
+    }
+}
+/* #endregion */
+
+/* #region --- Secondary Semantic Control Grid --- */
+/*
+.col-1-c { width: 8.333%; } 
+.col-2-c { width: 16.666%; } 
+.col-3-c { width: 25%; } 
+.col-4-c { width: 33.333%; } 
+.col-5-c { width: 41.665%; } 
+.col-6-c { width: 50%; } 
+.col-7-c { width: 58.331%; }
+.col-8-c { width: 66.664%; } 
+.col-9-c { width: 75%; } 
+.col-10-c { width: 83.33%; } 
+.col-11-c { width: 91.663%; } 
+.col-12-c { width: 100%; } 
+*/
+
+@for $i from 1 through $cols {
+    .col-#{$i}-#{'c'} {
+        @extend .extend-col;
+    }
+}
+/* #endregion */
+
+/* --- Layout helpers --- */
+.display-none {
+    display: none;
+}
+
+.display-none-important {
+    display: none !important;
+}
+
+.display-block {
+    display: block;
+}
+
+.display-inline-block {
+    display: inline-block;
+}
+
+.visible-hidden {
+    visibility: hidden;
+}
+
+.block-center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    float: none;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+.clear-both {
+    clear: both;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Line Hight Set http://csswizardry.com/2012/06/single-direction-margin-declarations/ */
+html {
+    font-size: 16px;
+    line-height: 1.5rem;
+}
+
+h1, h2, h3, h4, h5, h6, hgroup,
+ul, ol, dl, blockquote, p, address,
+table, fieldset, figure, pre, .header, img {
+    margin: 0;
+    margin-bottom: 1.5rem;
+}
+
+/* Margin Helpers */
+.margin-top {
+    margin-top: 24px;
+}
+
+.margin-bottom {
+    margin-bottom: 24px;
+}
+
+.margin-top-small {
+    margin-top: 12px;
+}
+
+.margin-bottom-small {
+    margin-bottom: 12px;
+}

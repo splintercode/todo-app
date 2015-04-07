@@ -1,0 +1,101 @@
+/*!
+    Cory Bateman http://www.corycode.me 
+    MIT License http://opensource.org/licenses/MIT 
+*/
+
+$full-width-max: 48em;
+$full-width-app: 48.125em;
+
+body {
+    font-family: Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
+    font-size: 16px;
+    background: #FCFCFC;
+    color: #2d2d2d;
+    overflow-x: hidden;
+    padding: 6px;
+}
+
+*, *:before, *:after {
+    /* Chrome 9-, Safari 5-, iOS 4.2-, Android 3-, Blackberry 7- */
+    -webkit-box-sizing: border-box;
+    /* Firefox (desktop or Android) 28- */
+    -moz-box-sizing: border-box;
+    /* Firefox 29+, IE 8+, Chrome 10+, Safari 5.1+, Opera 9.5+, iOS 5+, Opera Mini Anything, Blackberry 10+, Android 4+ */
+    box-sizing: border-box;
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
+}
+
+.ng-hide {
+    /* this is just another form of hiding an element */
+    display: block !important;
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
+
+a {
+    color: #2d2d2d;
+    cursor: pointer;
+    text-decoration: underline;
+
+    &:hover {
+        color: #2d2d2d;
+        text-decoration: none;
+    }
+}
+
+header {
+}
+
+main {
+}
+
+footer {
+}
+
+h1 {
+    font-size: 2em;
+    line-height: 1.2em;
+
+    @include respond-min(600px) {
+        font-size: 2.2em;
+    }
+}
+
+h2 {
+    display: inline-block;
+    position: absolute;
+    left: 100px;
+    font-size: 1.2em;
+    margin-top: 16px;
+
+    @include respond-min(600px) {
+        font-size: 1.6em;
+        margin-top: 20px;
+    }
+}
+
+.text-center {
+    text-align: center;
+}
+
+.btn-link {
+    text-decoration: underline;
+    cursor: pointer;
+    background: none;
+    border: 0;
+    font-size: 16px;
+
+    &:hover {
+        text-decoration: none;
+    }
+
+    &--large {
+        @extend .btn-link;
+        font-size: 22px;
+    }
+}
