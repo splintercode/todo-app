@@ -6,11 +6,14 @@ var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 
 var jsLibraries = [
-    './app/libraries/modernizr.js'
+    './app/libraries/modernizr.js',
+    './app/libraries/angular/angular.min.js',
+    './app/libraries/angular/angular-route.min.js'
 ];
 
 var jsSource = [
-    './app/*.js'
+    './app/app.js',
+    './app/base.controller.js'
 ];
 
 var specSource = [
@@ -49,14 +52,22 @@ gulp.task('hint', function() {
 gulp.task('js', function() {
 
     // App
-    browserify('./app/app.js', { debug: true })
-        .transform(babelify)
-        .bundle()
-        .on('error', function(err) { console.log('Error: ' + err.message); })
-        .pipe(source('app.js'))
+    //browserify('./app/app.js', { debug: true })
+    //    .transform(babelify)
+    //    .bundle()
+    //    .on('error', function(err) { console.log('Error: ' + err.message); })
+    //    .pipe(source(jsSource))
+    //    .pipe(gulp.dest('./build/js'))
+    //    .pipe(plug.rename({ suffix: '.min' }))
+    //    .pipe(buffer())
+    //    .pipe(plug.uglify({ mangle: true }))
+    //    .pipe(gulp.dest('./build/js'));
+
+    // App
+    gulp.src(jsLibraries.concat(jsSource))
+        .pipe(plug.concat('app.js'))
         .pipe(gulp.dest('./build/js'))
         .pipe(plug.rename({ suffix: '.min' }))
-        .pipe(buffer())
         .pipe(plug.uglify({ mangle: true }))
         .pipe(gulp.dest('./build/js'));
 

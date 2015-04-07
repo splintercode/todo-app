@@ -1,7 +1,22 @@
 ﻿(function () {
     'use strict';
 
-    let test = 'hello world';
+    var app = angular.module('app', [
+        'ngRoute',
+        'app.controllers'
+    ]);
 
-    console.log(test);
+    app.config(['$routeProvider', function($routeProvider) {
+        //$locationProvider.html5Mode(true);
+
+        $routeProvider.when('/', {
+            templateUrl: 'home.html'
+        });
+
+        $routeProvider.when('/about', {
+            templateUrl: 'about.html'
+        });
+
+        $routeProvider.otherwise({ redirectTo: '/' });
+    }]);
 }());
