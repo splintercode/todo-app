@@ -19,17 +19,18 @@
 <body ng-controller="BaseCtrl as base">
     <div class="container">
         <header>
-            <h1>Web App {{base.name}}</h1>
-        </header>
+            <h1>{{base.provider}}</h1>
+        </header><br />
         <main>
-
+            <button type="button" ng-click="base.loginTwitter()">Login In Twitter</button>
+            <button type="button" ng-click="base.logout()">Logout</button>
         </main>
         <footer>
             <!--<a href="https://github.com/splintercode" target="_blank" class="built-by">Built by Cory Bateman</a>
             <a href="https://plus.google.com/u/0/102986296317731631979?rel=author" rel="publisher"></a>-->
         </footer>
     </div>
-
+    <script src="build/js/lib.js?v=1.0"></script>
     <script src="build/js/app.js?v=1.0"></script>
 </body>
 </html>

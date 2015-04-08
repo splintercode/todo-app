@@ -1,8 +1,9 @@
 ﻿(function () {
     'use strict';
 
-    var app = angular.module('app', [
+    let app = angular.module('app', [
         'ngRoute',
+        'firebase',
         'app.controllers'
     ]);
 
@@ -18,5 +19,19 @@
         });
 
         $routeProvider.otherwise({ redirectTo: '/' });
+    }]);
+
+    app.run(['$rootScope', '$location', 'authService', function ($rootScope, $location, authService) {
+        $rootScope.$on('$routeChangeStart', function (event) {
+            if (!authService.isLoggedIn()) {
+                console.log('DENY');
+                event.preventDefault();
+                $location.path('/login');
+            }
+            else {
+                console.log('ALLOW');
+                $location.path('/home');
+            }
+        });
     }]);
 }());
