@@ -11,26 +11,29 @@
         //$locationProvider.html5Mode(true);
 
         $routeProvider.when('/', {
-            templateUrl: 'home.html'
+            templateUrl: 'app/views/home.html'
         });
 
         $routeProvider.when('/about', {
-            templateUrl: 'about.html'
+            templateUrl: 'app/views/about.html'
+        });
+
+        $routeProvider.when('/account', {
+            templateUrl: 'app/views/account.html'
         });
 
         $routeProvider.otherwise({ redirectTo: '/' });
     }]);
 
     app.run(['$rootScope', '$location', 'authService', function ($rootScope, $location, authService) {
-        $rootScope.$on('$routeChangeStart', function (event) {
-            if (!authService.isLoggedIn()) {
-                console.log('DENY');
-                event.preventDefault();
-                $location.path('/login');
-            }
-            else {
-                console.log('ALLOW');
-                $location.path('/home');
+        $rootScope.$on('$routeChangeStart', function (event, next, current) {
+            console.log(current);
+            if (!authService.isLoggedIn() && $location.path() === '/account') {
+                //event.preventDefault();
+                $location.path('/');
+                console.log('Route Unauthenticated');
+            }  else {
+                console.log('Route Authenticated');
             }
         });
     }]);

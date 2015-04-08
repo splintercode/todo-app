@@ -9,25 +9,29 @@
         //$locationProvider.html5Mode(true);
 
         $routeProvider.when('/', {
-            templateUrl: 'home.html'
+            templateUrl: 'app/views/home.html'
         });
 
         $routeProvider.when('/about', {
-            templateUrl: 'about.html'
+            templateUrl: 'app/views/about.html'
+        });
+
+        $routeProvider.when('/account', {
+            templateUrl: 'app/views/account.html'
         });
 
         $routeProvider.otherwise({ redirectTo: '/' });
     }]);
 
     app.run(['$rootScope', '$location', 'authService', function ($rootScope, $location, authService) {
-        $rootScope.$on('$routeChangeStart', function (event) {
-            if (!authService.isLoggedIn()) {
-                console.log('DENY');
-                event.preventDefault();
-                $location.path('/login');
+        $rootScope.$on('$routeChangeStart', function (event, next, current) {
+            console.log(current);
+            if (!authService.isLoggedIn() && $location.path() === '/account') {
+                //event.preventDefault();
+                $location.path('/');
+                console.log('Route Unauthenticated');
             } else {
-                console.log('ALLOW');
-                $location.path('/home');
+                console.log('Route Authenticated');
             }
         });
     }]);
@@ -83,13 +87,14 @@
 
     var appControllers = angular.module('app.controllers', []);
 
-    appControllers.controller('BaseCtrl', ['$firebaseAuth', 'authService', function ($firebaseAuth, authService) {
+    appControllers.controller('BaseCtrl', ['$location', '$firebaseAuth', 'authService', function ($location, $firebaseAuth, authService) {
         var ref = new Firebase('https://todo-app-core.firebaseio.com');
         var auth = $firebaseAuth(ref);
         var authData = ref.getAuth();
 
         var vm = this;
 
+        vm.isAuthenticated = false;
         vm.provider = 'Not logged in.';
         vm.loginTwitter = loginTwitter;
         vm.logout = logout;
@@ -99,6 +104,7 @@
         function loginTwitter() {
             authService.loginTwitter().then(function (authData) {
                 setLoggedInInfo(authData);
+                $location.path('/account');
             })['catch'](function (error) {
                 console.log('Authentication failed:', error);
             });
@@ -107,11 +113,15 @@
         function logout() {
             authService.logout();
             vm.provider = 'Not logged in.';
+            vm.isAuthenticated = false;
+
+            $location.path('/');
         }
 
         function setLoggedInInfo(authData) {
             if (authData !== null && authData.uid !== null) {
                 vm.provider = 'Logged in with ' + authData.provider;
+                vm.isAuthenticated = true;
 
                 console.log('Authenticated successfully with payload:', authData);
                 console.log('User ' + authData.uid + ' is logged in with ' + authData.provider);

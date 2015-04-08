@@ -19,11 +19,18 @@
 <body ng-controller="BaseCtrl as base">
     <div class="container">
         <header>
-            <h1>{{base.provider}}</h1>
-        </header><br />
-        <main>
-            <button type="button" ng-click="base.loginTwitter()">Login In Twitter</button>
-            <button type="button" ng-click="base.logout()">Logout</button>
+            <h1 class="float-left">Todo App</h1>
+            <span class="float-right">{{base.provider}}</span>
+            <div class="clear-both"></div>
+            <nav>
+                <a href="#/home">Home</a>
+                <a href="#/about">About</a>
+                <a href="#/account">Account</a>
+            </nav>
+        </header>
+        <div class="clear-both"></div><br/>
+        <main ng-view>
+
         </main>
         <footer>
             <!--<a href="https://github.com/splintercode" target="_blank" class="built-by">Built by Cory Bateman</a>
