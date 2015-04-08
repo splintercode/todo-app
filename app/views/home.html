@@ -2,4 +2,6 @@
 <p>
     This is the home page.
 </p>
-<button type="button" ng-hide="base.isAuthenticated" ng-click="base.loginTwitter()">Login With Twitter</button>
+<button type="button" ng-hide="base.isAuthenticated" ng-click="base.login('twitter')">Login With Twitter</button>
+<button type="button" ng-hide="base.isAuthenticated" ng-click="base.login('google')">Login With Google</button>
+<button type="button" ng-hide="base.isAuthenticated" ng-click="base.login('facebook')">Login With Facebook</button>

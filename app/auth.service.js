@@ -10,21 +10,19 @@
     function authService($firebaseAuth) {
         let ref = new Firebase("https://todo-app-core.firebaseio.com");
         let auth = $firebaseAuth(ref);
-        let authData = ref.getAuth();
 
         let authService = {
-            loginTwitter: loginTwitter,
+            login: login,
             logout: logout,
             isLoggedIn: isLoggedIn
         };
 
         return authService;
 
-        function loginTwitter() {
-            return auth.$authWithOAuthPopup("twitter").then(function(response) {
-                let usersRef = ref.child('/users/' + response.uid);
-                usersRef.set(response);  // Save user data
-                authData = response;
+        function login(provider) {
+            return auth.$authWithOAuthPopup(provider).then(function(authData) {
+                let usersRef = ref.child('/users/' + authData.uid);
+                usersRef.set(authData);  // Save user data
 
                 return authData;
             }).catch(function(error) {
@@ -34,15 +32,10 @@
 
         function logout() {
             ref.unauth();
-            authData = null;
         }
 
         function isLoggedIn() {
-            if(authData !== null && authData.uid !== null) {
-                return true;
-            } else {
-                return false;
-            }
+            return !!ref.getAuth();
         }
     }
 }());

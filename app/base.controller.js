@@ -12,13 +12,13 @@
 
         vm.isAuthenticated = false;
         vm.provider = 'Not logged in.';
-        vm.loginTwitter = loginTwitter;
+        vm.login = login;
         vm.logout = logout;
 
         setLoggedInInfo(authData);
 
-        function loginTwitter() {
-            authService.loginTwitter().then(function(authData) {
+        function login(provider) {
+            authService.login(provider).then(function(authData) {
                 setLoggedInInfo(authData);
                 $location.path('/account');
             }).catch(function(error) {
