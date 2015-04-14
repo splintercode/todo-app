@@ -22,7 +22,7 @@ var jsSource = [
     './app/auth.service.js',
     './app/base.controller.js',
     './app/todo.controller.js',
-    './app/todo-item.directive.js'
+    './app/todo-items.directive.js'
 ];
 
 var specSource = [

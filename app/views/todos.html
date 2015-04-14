@@ -6,7 +6,5 @@
         <button type="submit" ng-disabled="todoForm.$invalid">Add</button>
     </form>
 
-    <ul>
-        <todo-item todo="todoItem" ng-repeat="todoItem in todo.todos"></todo-item>
-    </ul>
+    <todo-items items="todo.todos"></todo-items>
 </div>

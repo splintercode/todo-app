@@ -154,21 +154,18 @@
 (function () {
     'use strict';
 
-    angular.module('app').directive('todoItem', todoItem);
+    angular.module('app').directive('todoItems', todoItems);
 
-    function todoItem() {
+    function todoItems() {
         var directive = {
-            link: link,
             replace: 'true',
-            template: '<li>{{todo.value}}</li>',
             restrict: 'E',
             scope: {
-                todo: '='
-            }
+                items: '='
+            },
+            template: ['<ul>', '<li ng-repeat="todo in items">', '{{todo.value}}', '<button type="button" ng-click="items.splice($index,1)">X</button>', '</li>', '</ul>'].join('')
         };
 
         return directive;
-
-        function link(scope, element, attrs) {}
     }
 })();
