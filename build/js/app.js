@@ -3,7 +3,9 @@
 (function () {
     'use strict';
 
-    var app = angular.module('app', ['ngRoute', 'firebase', 'app.controllers']);
+    var app = angular.module('app', ['ngRoute', 'firebase']);
+
+    app.constant('FIREBASE_URL', 'https://todo-app-core.firebaseio.com');
 
     app.config(['$routeProvider', function ($routeProvider) {
         //$locationProvider.html5Mode(true);
@@ -16,8 +18,12 @@
             templateUrl: 'app/views/about.html'
         });
 
-        $routeProvider.when('/account', {
-            templateUrl: 'app/views/account.html'
+        $routeProvider.when('/settings', {
+            templateUrl: 'app/views/settings.html'
+        });
+
+        $routeProvider.when('/todos', {
+            templateUrl: 'app/views/todos.html'
         });
 
         $routeProvider.otherwise({ redirectTo: '/' });
@@ -25,8 +31,7 @@
 
     app.run(['$rootScope', '$location', 'authService', function ($rootScope, $location, authService) {
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
-            console.log(current);
-            if (!authService.isLoggedIn() && $location.path() === '/account') {
+            if (!authService.isLoggedIn()) {
                 //event.preventDefault();
                 $location.path('/');
                 console.log('Route Unauthenticated');
@@ -41,10 +46,10 @@
 
     angular.module('app').factory('authService', authService);
 
-    authService.$inject = ['$firebaseAuth'];
+    authService.$inject = ['$firebaseAuth', 'FIREBASE_URL'];
 
-    function authService($firebaseAuth) {
-        var ref = new Firebase('https://todo-app-core.firebaseio.com');
+    function authService($firebaseAuth, FIREBASE_URL) {
+        var ref = new Firebase(FIREBASE_URL);
         var auth = $firebaseAuth(ref);
 
         var authService = {
@@ -59,6 +64,9 @@
             return auth.$authWithOAuthPopup(provider).then(function (authData) {
                 var usersRef = ref.child('/users/' + authData.uid);
                 usersRef.set(authData); // Save user data
+
+                console.log('Authenticated successfully with payload:', authData);
+                console.log('User ' + authData.uid + ' is logged in with ' + authData.provider);
 
                 return authData;
             })['catch'](function (error) {
@@ -78,17 +86,17 @@
 (function () {
     'use strict';
 
-    var appControllers = angular.module('app.controllers', []);
+    angular.module('app').controller('BaseCtrl', BaseCtrl);
 
-    appControllers.controller('BaseCtrl', ['$location', '$firebaseAuth', 'authService', function ($location, $firebaseAuth, authService) {
-        var ref = new Firebase('https://todo-app-core.firebaseio.com');
-        var auth = $firebaseAuth(ref);
+    BaseCtrl.$inject = ['$location', 'FIREBASE_URL', 'authService'];
+
+    function BaseCtrl($location, FIREBASE_URL, authService) {
+        var vm = this;
+        var ref = new Firebase(FIREBASE_URL);
         var authData = ref.getAuth();
 
-        var vm = this;
-
         vm.isAuthenticated = false;
-        vm.provider = 'Not logged in.';
+        vm.provider = 'Not logged in';
         vm.login = login;
         vm.logout = logout;
 
@@ -97,7 +105,7 @@
         function login(provider) {
             authService.login(provider).then(function (authData) {
                 setLoggedInInfo(authData);
-                $location.path('/account');
+                $location.path('/todos');
             })['catch'](function (error) {
                 console.log('Authentication failed:', error);
             });
@@ -105,7 +113,7 @@
 
         function logout() {
             authService.logout();
-            vm.provider = 'Not logged in.';
+            vm.provider = 'Not logged in';
             vm.isAuthenticated = false;
 
             $location.path('/');
@@ -115,10 +123,52 @@
             if (authData !== null && authData.uid !== null) {
                 vm.provider = 'Logged in with ' + authData.provider;
                 vm.isAuthenticated = true;
-
-                console.log('Authenticated successfully with payload:', authData);
-                console.log('User ' + authData.uid + ' is logged in with ' + authData.provider);
             }
         }
-    }]);
+    }
+})();
+(function () {
+    'use strict';
+
+    angular.module('app').controller('TodoCtrl', TodoCtrl);
+
+    TodoCtrl.$inject = ['FIREBASE_URL', 'authService'];
+
+    function TodoCtrl(FIREBASE_URL, authService) {
+        var vm = this;
+        //let ref = new Firebase(FIREBASE_URL);
+        //let authData = ref.getAuth();
+
+        vm.input = '';
+        vm.submit = submit;
+        vm.todos = [{ value: 'todo 1' }, { value: 'todo 2' }, { value: 'todo 3' }, { value: 'todo 4' }];
+
+        function submit(isValid) {
+            if (isValid) {
+                vm.todos.push({ value: vm.input });
+                vm.input = '';
+            }
+        }
+    }
+})();
+(function () {
+    'use strict';
+
+    angular.module('app').directive('todoItem', todoItem);
+
+    function todoItem() {
+        var directive = {
+            link: link,
+            replace: 'true',
+            template: '<li>{{todo.value}}</li>',
+            restrict: 'E',
+            scope: {
+                todo: '='
+            }
+        };
+
+        return directive;
+
+        function link(scope, element, attrs) {}
+    }
 })();

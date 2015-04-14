@@ -1,0 +1,12 @@
+<div ng-controller="TodoCtrl as todo">
+    <h1>Todos</h1>
+
+    <form name="todoForm" ng-submit="todo.submit(todoForm.$valid)" novalidate>
+        <input type="text" name="name" ng-model="todo.input" required>
+        <button type="submit" ng-disabled="todoForm.$invalid">Add</button>
+    </form>
+
+    <ul>
+        <todo-item todo="todoItem" ng-repeat="todoItem in todo.todos"></todo-item>
+    </ul>
+</div>

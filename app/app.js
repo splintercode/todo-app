@@ -3,9 +3,10 @@
 
     let app = angular.module('app', [
         'ngRoute',
-        'firebase',
-        'app.controllers'
+        'firebase'
     ]);
+
+    app.constant('FIREBASE_URL', 'https://todo-app-core.firebaseio.com');
 
     app.config(['$routeProvider', function($routeProvider) {
         //$locationProvider.html5Mode(true);
@@ -18,8 +19,12 @@
             templateUrl: 'app/views/about.html'
         });
 
-        $routeProvider.when('/account', {
-            templateUrl: 'app/views/account.html'
+        $routeProvider.when('/settings', {
+            templateUrl: 'app/views/settings.html'
+        });
+
+        $routeProvider.when('/todos', {
+            templateUrl: 'app/views/todos.html'
         });
 
         $routeProvider.otherwise({ redirectTo: '/' });
@@ -27,8 +32,7 @@
 
     app.run(['$rootScope', '$location', 'authService', function ($rootScope, $location, authService) {
         $rootScope.$on('$routeChangeStart', function (event, next, current) {
-            console.log(current);
-            if (!authService.isLoggedIn() && $location.path() === '/account') {
+            if (!authService.isLoggedIn()) {
                 //event.preventDefault();
                 $location.path('/');
                 console.log('Route Unauthenticated');

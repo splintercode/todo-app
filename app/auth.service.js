@@ -5,10 +5,10 @@
         .module('app')
         .factory('authService', authService);
 
-    authService.$inject = ['$firebaseAuth'];
+    authService.$inject = ['$firebaseAuth', 'FIREBASE_URL'];
 
-    function authService($firebaseAuth) {
-        let ref = new Firebase("https://todo-app-core.firebaseio.com");
+    function authService($firebaseAuth, FIREBASE_URL) {
+        let ref = new Firebase(FIREBASE_URL);
         let auth = $firebaseAuth(ref);
 
         let authService = {
@@ -23,6 +23,9 @@
             return auth.$authWithOAuthPopup(provider).then(function(authData) {
                 let usersRef = ref.child('/users/' + authData.uid);
                 usersRef.set(authData);  // Save user data
+
+                console.log("Authenticated successfully with payload:", authData);
+                console.log("User " + authData.uid + " is logged in with " + authData.provider);
 
                 return authData;
             }).catch(function(error) {

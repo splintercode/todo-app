@@ -20,7 +20,9 @@ var jsLibraries = [
 var jsSource = [
     './app/app.js',
     './app/auth.service.js',
-    './app/base.controller.js'
+    './app/base.controller.js',
+    './app/todo.controller.js',
+    './app/todo-item.directive.js'
 ];
 
 var specSource = [
