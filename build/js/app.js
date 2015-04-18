@@ -22,10 +22,6 @@
             templateUrl: 'app/views/settings.html'
         });
 
-        $routeProvider.when('/todos', {
-            templateUrl: 'app/views/todos.html'
-        });
-
         $routeProvider.otherwise({ redirectTo: '/' });
     }]);
 
@@ -63,15 +59,13 @@
         function login(provider) {
             return auth.$authWithOAuthPopup(provider).then(function (authData) {
                 var usersRef = ref.child('/users/' + authData.uid);
-                usersRef.set(authData); // Save user data
+                usersRef.child('authData').set(authData); // Save user data
 
-                console.log('Authenticated successfully with payload:', authData);
-                console.log('User ' + authData.uid + ' is logged in with ' + authData.provider);
+                //console.log("Authenticated successfully with payload:", authData);
+                //console.log("User " + authData.uid + " is logged in with " + authData.provider);
 
                 return authData;
-            })['catch'](function (error) {
-                console.log('Authentication failed:', error);
-            });
+            })['catch'](function (error) {});
         }
 
         function logout() {
@@ -132,20 +126,25 @@
 
     angular.module('app').controller('TodoCtrl', TodoCtrl);
 
-    TodoCtrl.$inject = ['FIREBASE_URL', 'authService'];
+    TodoCtrl.$inject = ['$firebaseArray', 'FIREBASE_URL', 'authService'];
 
-    function TodoCtrl(FIREBASE_URL, authService) {
+    function TodoCtrl($firebaseArray, FIREBASE_URL, authService) {
         var vm = this;
-        //let ref = new Firebase(FIREBASE_URL);
-        //let authData = ref.getAuth();
+
+        var ref = new Firebase(FIREBASE_URL);
+        var authData = ref.getAuth();
+        var todosRef = new Firebase(FIREBASE_URL + '/users/' + authData.uid + '/todos');
 
         vm.input = '';
         vm.submit = submit;
-        vm.todos = [{ value: 'todo 1' }, { value: 'todo 2' }, { value: 'todo 3' }, { value: 'todo 4' }];
+        vm.todos = $firebaseArray(todosRef);
 
         function submit(isValid) {
             if (isValid) {
-                vm.todos.push({ value: vm.input });
+                vm.todos.$add({
+                    value: vm.input
+                });
+
                 vm.input = '';
             }
         }
@@ -163,9 +162,11 @@
             scope: {
                 items: '='
             },
-            template: ['<ul>', '<li ng-repeat="todo in items">', '{{todo.value}}', '<button type="button" ng-click="items.splice($index,1)">X</button>', '</li>', '</ul>'].join('')
+            template: ['<ul class="todo-list">', '<li ng-repeat="todo in items" class="todo-list__item">', '{{todo.value}}', '<button type="button" ng-click="items.$remove($index)" class="todo-list__btn">X</button>', '</li>', '</ul>'].join('')
         };
 
         return directive;
     }
 })();
+
+//console.log("Authentication failed:", error);

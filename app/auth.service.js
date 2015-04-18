@@ -22,14 +22,14 @@
         function login(provider) {
             return auth.$authWithOAuthPopup(provider).then(function(authData) {
                 let usersRef = ref.child('/users/' + authData.uid);
-                usersRef.set(authData);  // Save user data
+                usersRef.child('authData').set(authData);  // Save user data
 
-                console.log("Authenticated successfully with payload:", authData);
-                console.log("User " + authData.uid + " is logged in with " + authData.provider);
+                //console.log("Authenticated successfully with payload:", authData);
+                //console.log("User " + authData.uid + " is logged in with " + authData.provider);
 
                 return authData;
             }).catch(function(error) {
-                console.log("Authentication failed:", error);
+                //console.log("Authentication failed:", error);
             });
         }
 

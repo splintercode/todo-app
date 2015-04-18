@@ -5,25 +5,25 @@
         .module('app')
         .controller('TodoCtrl', TodoCtrl);
 
-    TodoCtrl.$inject = ['FIREBASE_URL', 'authService'];
+    TodoCtrl.$inject = ['$firebaseArray', 'FIREBASE_URL', 'authService'];
 
-    function TodoCtrl(FIREBASE_URL, authService) {
+    function TodoCtrl($firebaseArray, FIREBASE_URL, authService) {
         let vm = this;
-        //let ref = new Firebase(FIREBASE_URL);
-        //let authData = ref.getAuth();
+
+        let ref = new Firebase(FIREBASE_URL);
+        let authData = ref.getAuth();
+        let todosRef = new Firebase(FIREBASE_URL + '/users/' + authData.uid + '/todos');
 
         vm.input = '';
         vm.submit = submit;
-        vm.todos = [
-            { value: 'todo 1' },
-            { value: 'todo 2' },
-            { value: 'todo 3' },
-            { value: 'todo 4' }
-        ];
+        vm.todos = $firebaseArray(todosRef);
 
         function submit(isValid) {
             if (isValid) {
-                vm.todos.push({ value: vm.input });
+                vm.todos.$add({
+                    value: vm.input
+                });
+
                 vm.input = '';
             }
         }

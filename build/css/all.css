@@ -1123,3 +1123,24 @@ h2 {
     opacity: 1;
   }
 }
+.todo-list {
+  padding: 0;
+}
+.todo-list__item {
+  list-style: none;
+  padding: 20px 0;
+  border-bottom: 1px solid #ccc;
+}
+.todo-list__btn {
+  background: none;
+  width: 30px;
+  height: 30px;
+  float: right;
+  border: 0;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 12px;
+}

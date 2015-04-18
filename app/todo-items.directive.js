@@ -13,10 +13,10 @@
                 items: '='
             },
             template: [
-                '<ul>',
-                    '<li ng-repeat="todo in items">',
+                '<ul class="todo-list">',
+                    '<li ng-repeat="todo in items" class="todo-list__item">',
                         '{{todo.value}}',
-                        '<button type="button" ng-click="items.splice($index,1)">X</button>',
+                        '<button type="button" ng-click="items.$remove($index)" class="todo-list__btn">X</button>',
                     '</li>',
                 '</ul>'
             ].join('')

@@ -23,10 +23,6 @@
             templateUrl: 'app/views/settings.html'
         });
 
-        $routeProvider.when('/todos', {
-            templateUrl: 'app/views/todos.html'
-        });
-
         $routeProvider.otherwise({ redirectTo: '/' });
     }]);
 

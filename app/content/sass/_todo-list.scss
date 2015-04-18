@@ -1,0 +1,17 @@
+.todo-list {
+  padding: 0;
+
+  &__item {
+    list-style: none;
+    padding: 20px 0;
+    border-bottom: 1px solid #ccc;
+  }
+
+  &__btn {
+    background: none;
+    width: 30px;
+    height: 30px;
+    float: right;
+    border: 0;
+  }
+}
