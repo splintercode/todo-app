@@ -80,6 +80,29 @@
 (function () {
     'use strict';
 
+    angular.module('app').factory('todoService', todoService);
+
+    todoService.$inject = ['$firebaseArray', 'FIREBASE_URL'];
+
+    function todoService($firebaseArray, FIREBASE_URL) {
+        var ref = new Firebase(FIREBASE_URL);
+        var authData = ref.getAuth();
+        var todosRef = new Firebase(FIREBASE_URL + '/users/' + authData.uid + '/todos');
+
+        var todoService = {
+            getTodosRef: getTodosRef
+        };
+
+        return todoService;
+
+        function getTodosRef() {
+            return $firebaseArray(todosRef);;
+        }
+    }
+})();
+(function () {
+    'use strict';
+
     angular.module('app').controller('BaseCtrl', BaseCtrl);
 
     BaseCtrl.$inject = ['$location', 'FIREBASE_URL', 'authService'];
@@ -126,20 +149,16 @@
 
     angular.module('app').controller('TodoCtrl', TodoCtrl);
 
-    TodoCtrl.$inject = ['$firebaseArray', 'FIREBASE_URL', 'authService'];
+    TodoCtrl.$inject = ['todoService'];
 
-    function TodoCtrl($firebaseArray, FIREBASE_URL, authService) {
+    function TodoCtrl(todoService) {
         var vm = this;
 
-        var ref = new Firebase(FIREBASE_URL);
-        var authData = ref.getAuth();
-        var todosRef = new Firebase(FIREBASE_URL + '/users/' + authData.uid + '/todos');
-
+        vm.todos = todoService.getTodosRef();
+        vm.addTodo = addTodo;
         vm.input = '';
-        vm.submit = submit;
-        vm.todos = $firebaseArray(todosRef);
 
-        function submit(isValid) {
+        function addTodo(isValid) {
             if (isValid) {
                 vm.todos.$add({
                     value: vm.input
