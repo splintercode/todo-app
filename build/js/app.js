@@ -105,9 +105,9 @@
 
     angular.module('app').controller('BaseCtrl', BaseCtrl);
 
-    BaseCtrl.$inject = ['$location', 'FIREBASE_URL', 'authService'];
+    BaseCtrl.$inject = ['$location', '$rootScope', 'FIREBASE_URL', 'authService'];
 
-    function BaseCtrl($location, FIREBASE_URL, authService) {
+    function BaseCtrl($location, $rootScope, FIREBASE_URL, authService) {
         var vm = this;
         var ref = new Firebase(FIREBASE_URL);
         var authData = ref.getAuth();
@@ -147,6 +147,10 @@
         function toggleNav() {
             vm.showNav = !vm.showNav;
         }
+
+        $rootScope.$on('$locationChangeStart', function () {
+            vm.showNav = false;
+        });
     }
 })();
 (function () {

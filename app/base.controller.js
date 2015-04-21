@@ -5,9 +5,9 @@
         .module('app')
         .controller('BaseCtrl', BaseCtrl);
 
-    BaseCtrl.$inject = ['$location', 'FIREBASE_URL', 'authService'];
+    BaseCtrl.$inject = ['$location', '$rootScope', 'FIREBASE_URL', 'authService'];
 
-    function BaseCtrl($location, FIREBASE_URL, authService) {
+    function BaseCtrl($location, $rootScope, FIREBASE_URL, authService) {
         let vm = this;
         let ref = new Firebase(FIREBASE_URL);
         let authData = ref.getAuth();
@@ -47,5 +47,9 @@
         function toggleNav() {
             vm.showNav = !vm.showNav;
         }
+
+        $rootScope.$on("$locationChangeStart",function(){
+            vm.showNav = false;
+        });
     }
 }());
