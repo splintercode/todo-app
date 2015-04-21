@@ -1,9 +1,11 @@
 input[type="text"] {
+    -webkit-appearance: none;
     padding: 9px;
     font-size: 16px;
     background-color: #fff;
     margin: 0 0 24px 0;
     border: 1px solid #929292;
+    border-radius: 0;
     width: 100%;
 }
 
