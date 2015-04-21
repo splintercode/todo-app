@@ -1,8 +1,8 @@
 @charset "UTF-8";
 @font-face {
   font-family: 'fontello';
-  src: url("../Fonts/Fontello/font/fontello.eot?61586391");
-  src: url("../Fonts/Fontello/font/fontello.eot?61586391#iefix") format("embedded-opentype"), url("../Fonts/Fontello/font/fontello.woff?61586391") format("woff"), url("../Fonts/Fontello/font/fontello.ttf?61586391") format("truetype"), url("../Fonts/Fontello/font/fontello.svg?61586391#fontello") format("svg");
+  src: url("../../App/Content/Fonts/Fontello/font/fontello.eot?61586391");
+  src: url("../../App/Content/Fonts/Fontello/font/fontello.eot?61586391#iefix") format("embedded-opentype"), url("../../App/Content/Fonts/Fontello/font/fontello.woff?61586391") format("woff"), url("../../App/Content/Fonts/Fontello/font/fontello.ttf?61586391") format("truetype"), url("../../App/Content/Fonts/Fontello/font/fontello.svg?61586391#fontello") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -1066,6 +1066,7 @@ a:hover {
 h1 {
   font-size: 2em;
   line-height: 1.2em;
+  margin-bottom: 12px;
 }
 @media screen and (min-width: 600px) {
   h1 {
@@ -1087,6 +1088,16 @@ h2 {
   }
 }
 
+a {
+  color: #2d2d2d;
+  cursor: pointer;
+  text-decoration: underline;
+}
+a:hover {
+  color: #2d2d2d;
+  text-decoration: none;
+}
+
 .text-center {
   text-align: center;
 }
@@ -1105,24 +1116,247 @@ h2 {
   font-size: 22px;
 }
 
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+input[type="text"] {
+  padding: 9px;
+  font-size: 16px;
+  background-color: #fff;
+  margin: 0 0 24px 0;
+  border: 1px solid #929292;
+  width: 100%;
+}
+
+.input-group {
+  position: relative;
+}
+.input-group input[type="text"] {
+  min-height: 18px;
+  border: 1px solid #4775d1;
+}
+.input-group button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-height: 37px;
+  border: 0;
+  padding: 6px 18px;
+}
+
+button {
+  background-color: #4775d1;
+  border: 0;
+  border-bottom: 2px solid #2952a3;
+  padding: 6px 12px;
+  font-size: 1.1em;
+  color: #fff;
+  margin: 0 0 24px 0;
+}
+button:active {
+  border-bottom: 2px solid #3366cc;
+  background-color: #3366cc;
+}
+
+main {
+  position: absolute;
+  top: 66px;
+  left: 0;
+  width: 100%;
+  padding: 8px;
+}
+@media screen and (min-width: 55.5em) {
+  main {
+    left: 260px;
+    top: 80px;
+    max-width: 600px;
   }
 }
-/* Firefox */
-/* Safari and Chrome */
-@-webkit-keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+
+.fade {
+  opacity: 1;
+}
+
+.fade.ng-enter,
+.fade.ng-leave {
+  transition: all 0.5s ease;
+}
+
+.fade.ng-enter {
+  opacity: 0;
+}
+
+.fade.ng-enter-active {
+  opacity: 1;
+}
+
+.fade.ng-leave {
+  opacity: 1;
+}
+
+.fade.ng-leave-active {
+  opacity: 0;
+}
+
+/* ng-repeat */
+.repeat-animation.ng-enter-stagger,
+.repeat-animation.ng-leave-stagger,
+.repeat-animation.ng-move-stagger {
+  /* 200ms will be applied between each sucessive enter operation */
+  transition-delay: 0.1s;
+}
+
+.repeat-animation.ng-enter,
+.repeat-animation.ng-leave,
+.repeat-animation.ng-move {
+  transition: 0.3s linear all;
+}
+
+.repeat-animation.ng-leave.ng-leave-active,
+.repeat-animation.ng-enter,
+.repeat-animation.ng-move {
+  transition: 0.3s linear all;
+  opacity: 0;
+}
+
+.repeat-animation.ng-leave,
+.repeat-animation.ng-move.ng-move-active,
+.repeat-animation.ng-enter.ng-enter-active {
+  opacity: 1;
+}
+
+header {
+  padding: 12px;
+  margin-bottom: 24px;
+  background: #3366cc;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  color: #FAF3F2;
+  border-bottom: 1px solid #2952a3;
+}
+@media screen and (min-width: 55.5em) {
+  header {
+    z-index: 4;
   }
 }
+
+.logo {
+  font-size: 2em;
+  line-height: 1.2em;
+  margin: 0 0 16px 0;
+}
+@media screen and (min-width: 600px) {
+  .logo {
+    font-size: 2.2em;
+  }
+}
+
+.logo {
+  margin-bottom: 0;
+  text-decoration: none;
+  color: #FAF3F2;
+}
+.logo:active, .logo:focus, .logo:hover {
+  text-decoration: none;
+  color: #FAF3F2;
+}
+
+#push-wrapper {
+  position: relative;
+  z-index: 10;
+  top: 0;
+  left: 0;
+}
+
+.mask-on {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+}
+@media screen and (min-width: 55.5em) {
+  .mask-on {
+    display: none;
+  }
+}
+
+.menu-btn {
+  position: absolute;
+  top: 8px;
+  right: 2px;
+  padding: 8px;
+  font-size: 1.8em;
+  background: 0 0;
+  border: none;
+}
+@media screen and (min-width: 55.5em) {
+  .menu-btn {
+    display: none;
+  }
+}
+
+.close-menu-btn {
+  background: none;
+  border: none;
+}
+
+.nav {
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 240px;
+  height: 100%;
+  left: -300px;
+  position: fixed;
+  z-index: 3;
+  background-color: #3366cc;
+  overflow: hidden;
+  transition: all 0.3s;
+}
+.nav .nav__link {
+  display: block;
+  padding: 13px;
+  font-size: 1.4em;
+  text-decoration: none;
+  font-weight: 300;
+  color: #fff;
+  border-bottom: 1px solid #2952a3;
+}
+.nav .nav__link:hover, .nav .nav__link:active, .nav .nav__link:focus {
+  background: #2e5cb8;
+}
+.nav .close-menu-btn {
+  color: #fff;
+  border: none;
+  margin-bottom: 6px;
+  padding: 10px;
+  display: block;
+  overflow: auto;
+  position: absolute;
+  font-size: 1.5em;
+  right: 0;
+}
+.nav .close-menu-btn:focus, .nav .close-menu-btn:active {
+  outline: none;
+}
+@media screen and (min-width: 55.5em) {
+  .nav {
+    position: absolute;
+    left: 0;
+    top: 65px;
+  }
+  .nav .close-menu-btn {
+    display: none;
+  }
+}
+
+.pml-open .nav {
+  left: 0;
+}
+
 .todo-list {
   padding: 0;
 }
@@ -1137,6 +1371,7 @@ h2 {
   height: 30px;
   float: right;
   border: 0;
+  color: #2d2d2d;
 }
 
 .card {

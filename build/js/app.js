@@ -3,7 +3,7 @@
 (function () {
     'use strict';
 
-    var app = angular.module('app', ['ngRoute', 'firebase']);
+    var app = angular.module('app', ['ngRoute', 'ngAnimate', 'firebase']);
 
     app.constant('FIREBASE_URL', 'https://todo-app-core.firebaseio.com');
 
@@ -116,6 +116,7 @@
         vm.provider = 'Not logged in';
         vm.login = login;
         vm.logout = logout;
+        vm.toggleNav = toggleNav;
 
         setLoggedInInfo(authData);
 
@@ -141,6 +142,10 @@
                 vm.provider = 'Logged in with ' + authData.provider;
                 vm.isAuthenticated = true;
             }
+        }
+
+        function toggleNav() {
+            vm.showNav = !vm.showNav;
         }
     }
 })();
@@ -181,7 +186,7 @@
             scope: {
                 items: '='
             },
-            template: ['<ul class="todo-list">', '<li ng-repeat="todo in items" class="todo-list__item">', '{{todo.value}}', '<button type="button" ng-click="items.$remove($index)" class="todo-list__btn">X</button>', '</li>', '</ul>'].join('')
+            template: ['<ul class="todo-list">', '<li ng-repeat="todo in items" class="todo-list__item repeat-animation">', '{{todo.value}}', '<button type="button" ng-click="items.$remove($index)" class="todo-list__btn">X</button>', '</li>', '</ul>'].join('')
         };
 
         return directive;

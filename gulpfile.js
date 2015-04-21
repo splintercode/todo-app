@@ -12,6 +12,7 @@ var jsLibraries = [
     './app/libraries/modernizr.js',
     './app/libraries/angular/angular.min.js',
     './app/libraries/angular/angular-route.min.js',
+    './app/libraries/angular/angular-animate.min.js',
     './app/libraries/firebase/firebase.min.js',
     './app/libraries/firebase/angularfire.min.js'
     //'./app/pollyfills/es6-promise-pollyfill.js'

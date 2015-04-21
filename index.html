@@ -2,40 +2,41 @@
 <html lang="en" ng-app="app">
 <head>
     <title>Todo Core</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="app/content/images/icon.png" type="image/png" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="shortcut icon" href="app/content/images/icon.png" type="image/png"/>
 
     <!-- Chrome and Safari Pinned Site App -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
 
     <!-- IOS Pinned Site App-->
-    <link rel="apple-touch-icon-precomposed" href="app/content/images/icon.png" />
+    <link rel="apple-touch-icon-precomposed" href="app/content/images/icon.png"/>
 
     <!-- Resources -->
-    <link href="build/css/all.min.css?v=1.0" rel="stylesheet" />
+    <link href="build/css/all.min.css?v=1.1" rel="stylesheet"/>
 </head>
-<body ng-controller="BaseCtrl as base">
-    <div class="container">
-        <header>
-            <div class="clear-both"></div>
-            <nav>
-                <a href="#/home">Home</a>
-                <a href="#/about">About</a>
-                <a href="#/settings">Settings</a>
-            </nav>
-        </header>
-        <div class="clear-both"></div><br/>
-        <main ng-view>
-
-        </main>
-        <footer>
-            <!--<a href="https://github.com/splintercode" target="_blank" class="built-by">Built by Cory Bateman</a>
-            <a href="https://plus.google.com/u/0/102986296317731631979?rel=author" rel="publisher"></a>-->
-        </footer>
-    </div>
-    <script src="build/js/lib.js?v=1.0"></script>
-    <script src="build/js/app.js?v=1.0"></script>
+<body ng-controller="BaseCtrl as base" ng-cloak ng-class="base.showNav ? 'pml-open' : ' '">
+<div class="container">
+    <nav class="nav push-menu-left">
+        <button ng-click="base.toggleNav()" class="close-menu-btn"><i class="icon-cancel float-right"></i></button>
+        <a href="#/home" ng-click="base.toggleNav()" class="nav__link">Home</a>
+        <a href="#/about" ng-click="base.toggleNav()" class="nav__link">About</a>
+        <a href="#/settings" ng-click="base.toggleNav()" class="nav__link">Settings</a>
+    </nav>
+    <header>
+        <a href="#/" class="logo">Core Todo</a>
+        <button class="menu-btn toggle-push-left float-right" ng-click="base.toggleNav()"><i class="icon-menu"></i></button>
+    </header>
+    <main ng-view class="fade">
+    </main>
+    <footer>
+        <!--<a href="https://github.com/splintercode" target="_blank" class="built-by">Built by Cory Bateman</a>
+        <a href="https://plus.google.com/u/0/102986296317731631979?rel=author" rel="publisher"></a>-->
+    </footer>
+</div>
+<div class="mask" ng-click="base.toggleNav()" ng-class="base.showNav ? 'mask-on' : ' '"></div>
+<script src="build/js/lib.js?v=1.1"></script>
+<script src="build/js/app.js?v=1.1"></script>
 </body>
 </html>

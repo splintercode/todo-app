@@ -1,22 +1,21 @@
 <section ng-if="!base.isAuthenticated">
-    <h1>TODO</h1>
+    <h1>Login</h1>
+
     <p>
         Login to save your todos.
     </p>
-    <button type="button" ng-hide="base.isAuthenticated" ng-click="base.login('twitter')">Login With Twitter</button>
-    <button type="button" ng-hide="base.isAuthenticated" ng-click="base.login('google')">Login With Google</button>
-    <button type="button" ng-hide="base.isAuthenticated" ng-click="base.login('facebook')">Login With Facebook</button>
+    <button type="button" ng-hide="base.isAuthenticated" ng-click="base.login('twitter')" class="full-width">Login With Twitter</button><br />
+    <button type="button" ng-hide="base.isAuthenticated" ng-click="base.login('google')" class="full-width">Login With Google</button><br />
+    <button type="button" ng-hide="base.isAuthenticated" ng-click="base.login('facebook')" class="full-width">Login With Facebook</button><br />
 </section>
 
 <section ng-if="base.isAuthenticated" ng-controller="TodoCtrl as todo">
-    <div class="card col-5-contain block-center">
-        <h1>Todos</h1>
+    <h1>Todos</h1>
 
-        <form name="todoForm" ng-submit="todo.addTodo(todoForm.$valid)" novalidate>
-            <input type="text" name="name" ng-model="todo.input" required>
-            <button type="submit" ng-disabled="todoForm.$invalid">Add</button>
-        </form>
+    <form name="todoForm" ng-submit="todo.addTodo(todoForm.$valid)" novalidate class="input-group">
+        <input type="text" name="name" ng-model="todo.input" required>
+        <button type="submit" ng-disabled="todoForm.$invalid">Add</button>
+    </form>
 
-        <todo-items items="todo.todos"></todo-items>
-    </div>
+    <todo-items items="todo.todos"></todo-items>
 </section>

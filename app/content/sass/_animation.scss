@@ -1,31 +1,77 @@
-@keyframes fadein {
-    from {
-        opacity: 0;
-    }
+main {
+    position: absolute;
+    top: 66px;
+    left: 0;
+    width: 100%;
+    padding: 8px;
 
-    to {
-        opacity: 1;
+    @include respond-min($nav-break) {
+        left: 260px;
+        top: 80px;
+        max-width: 600px;
     }
 }
 
-/* Firefox */
-@-moz-keyframes fadein {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
+.fade {
+    opacity: 1;
 }
 
-/* Safari and Chrome */
-@-webkit-keyframes fadein {
-    from {
-        opacity: 0;
-    }
+.fade.ng-enter,
+.fade.ng-leave {
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
 
-    to {
-        opacity: 1;
-    }
+.fade.ng-enter {
+    opacity: 0;
+}
+
+.fade.ng-enter-active {
+    opacity: 1;
+}
+
+.fade.ng-leave {
+    opacity: 1;
+}
+
+.fade.ng-leave-active {
+    opacity: 0;
+}
+
+
+/* ng-repeat */
+.repeat-animation {
+
+}
+
+.repeat-animation.ng-enter-stagger,
+.repeat-animation.ng-leave-stagger,
+.repeat-animation.ng-move-stagger {
+    /* 200ms will be applied between each sucessive enter operation */
+    -webkit-transition-delay:0.1s;
+    transition-delay:0.1s;
+}
+
+.repeat-animation.ng-enter,
+.repeat-animation.ng-leave,
+.repeat-animation.ng-move {
+    -webkit-transition:0.3s linear all;
+    transition:0.3s linear all;
+}
+
+.repeat-animation.ng-leave.ng-leave-active,
+.repeat-animation.ng-enter,
+.repeat-animation.ng-move {
+    -webkit-transition:0.5s linear all;
+    transition:0.3s linear all;
+
+    opacity:0;
+}
+
+.repeat-animation.ng-leave,
+.repeat-animation.ng-move.ng-move-active,
+.repeat-animation.ng-enter.ng-enter-active {
+    opacity:1;
 }

@@ -16,6 +16,7 @@
         vm.provider = 'Not logged in';
         vm.login = login;
         vm.logout = logout;
+        vm.toggleNav = toggleNav;
 
         setLoggedInInfo(authData);
 
@@ -36,11 +37,15 @@
             $location.path('/');
         }
 
-        function setLoggedInInfo(authData){
-            if(authData !== null && authData.uid !== null) {
+        function setLoggedInInfo(authData) {
+            if (authData !== null && authData.uid !== null) {
                 vm.provider = 'Logged in with ' + authData.provider;
                 vm.isAuthenticated = true;
             }
+        }
+
+        function toggleNav() {
+            vm.showNav = !vm.showNav;
         }
     }
 }());

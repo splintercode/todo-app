@@ -70,6 +70,7 @@ $col-width: ($container-width / 12);
         padding: 0;
     }
 }
+
 /* #endregion */
 
 /* #region --- Extra Small Auto Grid --- */
@@ -87,6 +88,7 @@ $col-width: ($container-width / 12);
 .hidden-xs, .hidden {
     display: none;
 }
+
 /* #endregion */
 
 /* #region --- Small Auto Grid 540px and greater --- */
@@ -111,6 +113,7 @@ $col-width: ($container-width / 12);
         display: none;
     }
 }
+
 /* #endregion */
 
 /* #region --- Primary Medium Auto Grid 720px and greater --- */
@@ -135,6 +138,7 @@ $col-width: ($container-width / 12);
         display: none;
     }
 }
+
 /* #endregion */
 
 /* #region --- Large Auto Grid 960px and greater --- */
@@ -159,6 +163,7 @@ $col-width: ($container-width / 12);
         display: none;
     }
 }
+
 /* #endregion */
 
 /* #region --- Secondary Semantic Control Grid --- */
@@ -182,6 +187,7 @@ $col-width: ($container-width / 12);
         @extend .extend-col;
     }
 }
+
 /* #endregion */
 
 /* --- Layout helpers --- */
@@ -257,3 +263,4 @@ table, fieldset, figure, pre, .header, img {
 .margin-bottom-small {
     margin-bottom: 12px;
 }
+

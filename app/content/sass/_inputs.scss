@@ -1,0 +1,41 @@
+input[type="text"] {
+    padding: 9px;
+    font-size: 16px;
+    background-color: #fff;
+    margin: 0 0 24px 0;
+    border: 1px solid #929292;
+    width: 100%;
+}
+
+.input-group {
+    position: relative;
+
+    input[type="text"] {
+        min-height: 18px;
+        border: 1px solid lighten($color-primary, 5%);
+    }
+
+    button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-height: 37px;
+        border: 0;
+        padding: 6px 18px;
+    }
+}
+
+button {
+    background-color: lighten($color-primary, 5%);
+    border: 0;
+    border-bottom: 2px solid darken($color-primary, 10%);
+    padding: 6px 12px;
+    font-size: 1.1em;
+    color: #fff;
+    margin: 0 0 24px 0;
+
+    &:active {
+        border-bottom: 2px solid $color-primary;
+        background-color: $color-primary;
+    }
+}
