@@ -1,13 +1,14 @@
 ﻿@font-face {
   font-family: 'fontello';
-  src: url('../../App/Content/Fonts/Fontello/font/fontello.eot?61586391');
-  src: url('../../App/Content/Fonts/Fontello/font/fontello.eot?61586391#iefix') format('embedded-opentype'),
-       url('../../App/Content/Fonts/Fontello/font/fontello.woff?61586391') format('woff'),
-       url('../../App/Content/Fonts/Fontello/font/fontello.ttf?61586391') format('truetype'),
-       url('../../App/Content/Fonts/Fontello/font/fontello.svg?61586391#fontello') format('svg');
+  src: url('../../app/content/fonts/fontello/font/fontello.eot?61586391');
+  src: url('../../app/content/fonts/fontello/font/fontello.eot?61586391#iefix') format('embedded-opentype'),
+       url('../../app/content/fonts/fontello/font/fontello.woff?61586391') format('woff'),
+       url('../../app/content/fonts/fontello/font/fontello.ttf?61586391') format('truetype'),
+       url('../../app/content/fonts/fontello/font/fontello.svg?61586391#fontello') format('svg');
   font-weight: normal;
   font-style: normal;
 }
+
 /* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
 /* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
 /*
