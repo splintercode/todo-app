@@ -13,10 +13,11 @@ input[type="text"] {
     position: relative;
     max-height: 38px;
     overflow: hidden;
+    border: 1px solid lighten($color-primary, 5%);
 
     input[type="text"] {
         min-height: 18px;
-        border: 1px solid lighten($color-primary, 5%);
+        border: 0;
     }
 
     button {

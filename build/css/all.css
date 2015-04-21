@@ -1131,10 +1131,11 @@ input[type="text"] {
   position: relative;
   max-height: 38px;
   overflow: hidden;
+  border: 1px solid #4775d1;
 }
 .input-group input[type="text"] {
   min-height: 18px;
-  border: 1px solid #4775d1;
+  border: 0;
 }
 .input-group button {
   position: absolute;
