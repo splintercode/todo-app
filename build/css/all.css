@@ -1088,6 +1088,10 @@ h2 {
   }
 }
 
+form {
+  margin-bottom: 24px;
+}
+
 a {
   color: #2d2d2d;
   cursor: pointer;
@@ -1366,17 +1370,26 @@ header {
   padding: 0;
 }
 .todo-list__item {
+  position: relative;
   list-style: none;
-  padding: 20px 0;
+  padding: 12px 0;
   border-bottom: 1px solid #ccc;
+  overflow: auto;
 }
-.todo-list__btn {
+.todo-list__close-btn {
   background: none;
   width: 30px;
   height: 30px;
   float: right;
   border: 0;
   color: #2d2d2d;
+  margin-bottom: 0;
+  position: absolute;
+  top: 5px;
+  right: 3px;
+}
+.todo-list input[type="text"] {
+  width: 100%;
 }
 
 .card {

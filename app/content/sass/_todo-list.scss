@@ -2,17 +2,27 @@
     padding: 0;
 
     &__item {
+        position: relative;
         list-style: none;
-        padding: 20px 0;
+        padding: 12px 0;
         border-bottom: 1px solid #ccc;
+        overflow: auto;
     }
 
-    &__btn {
+    &__close-btn {
         background: none;
         width: 30px;
         height: 30px;
         float: right;
         border: 0;
         color: #2d2d2d;
+        margin-bottom: 0;
+        position: absolute;
+        top: 5px;
+        right: 3px;
+    }
+
+    input[type="text"] {
+        width: 100%;
     }
 }
