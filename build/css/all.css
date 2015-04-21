@@ -1129,6 +1129,8 @@ input[type="text"] {
 
 .input-group {
   position: relative;
+  max-height: 38px;
+  overflow: hidden;
 }
 .input-group input[type="text"] {
   min-height: 18px;
@@ -1140,7 +1142,7 @@ input[type="text"] {
   right: 0;
   min-height: 37px;
   border: 0;
-  padding: 7px 18px;
+  padding: 7px 18px 8px 18px;
 }
 
 button {
