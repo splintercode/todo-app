@@ -3,8 +3,8 @@
 
     let app = angular.module('app', [
         'ngRoute',
-        'ngAnimate',
         'ngTouch',
+        //'ngAnimate',
         'firebase'
     ]);
 

@@ -15,10 +15,10 @@
             template: [
                 '<ul class="todo-list">',
                     '<li ng-repeat="todo in vm.items" class="todo-list__item repeat-animation" ng-swipe-left="vm.removeTodo($index)" ng-swipe-right="vm.removeTodo($index)">',
-                        '<div ng-show="editingTodo" class="input-group">',
+                        '<form ng-show="editingTodo" ng-submit="editingTodo = !editingTodo" class="input-group" novalidate>',
                             '<input type="text" ng-model="todo.value" ng-change="vm.saveTodo(todo)" />',
-                            '<button ng-click="editingTodo = !editingTodo">Save</button>',
-                        '</div>',
+                            '<button type="submit">Save</button>',
+                        '</form>',
 
                         '<div ng-hide="editingTodo">',
                             '<div ng-click="editingTodo = !editingTodo">{{todo.value}}</div>',

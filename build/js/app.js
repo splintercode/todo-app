@@ -3,7 +3,9 @@
 (function () {
     'use strict';
 
-    var app = angular.module('app', ['ngRoute', 'ngAnimate', 'ngTouch', 'firebase']);
+    var app = angular.module('app', ['ngRoute', 'ngTouch',
+    //'ngAnimate',
+    'firebase']);
 
     app.constant('FIREBASE_URL', 'https://todo-app-core.firebaseio.com');
 
@@ -190,7 +192,7 @@
             scope: {
                 items: '='
             },
-            template: ['<ul class="todo-list">', '<li ng-repeat="todo in vm.items" class="todo-list__item repeat-animation" ng-swipe-left="vm.removeTodo($index)" ng-swipe-right="vm.removeTodo($index)">', '<div ng-show="editingTodo" class="input-group">', '<input type="text" ng-model="todo.value" ng-change="vm.saveTodo(todo)" />', '<button ng-click="editingTodo = !editingTodo">Save</button>', '</div>', '<div ng-hide="editingTodo">', '<div ng-click="editingTodo = !editingTodo">{{todo.value}}</div>', '<button ng-click="vm.removeTodo($index)" class="todo-list__close-btn">x</button>', '</div>', '</li>', '</ul>'].join(''),
+            template: ['<ul class="todo-list">', '<li ng-repeat="todo in vm.items" class="todo-list__item repeat-animation" ng-swipe-left="vm.removeTodo($index)" ng-swipe-right="vm.removeTodo($index)">', '<form ng-show="editingTodo" ng-submit="editingTodo = !editingTodo" class="input-group" novalidate>', '<input type="text" ng-model="todo.value" ng-change="vm.saveTodo(todo)" />', '<button type="submit">Save</button>', '</form>', '<div ng-hide="editingTodo">', '<div ng-click="editingTodo = !editingTodo">{{todo.value}}</div>', '<button ng-click="vm.removeTodo($index)" class="todo-list__close-btn">x</button>', '</div>', '</li>', '</ul>'].join(''),
             controller: TodoItemsController,
             controllerAs: 'vm',
             bindToController: true // because the scope is isolated
