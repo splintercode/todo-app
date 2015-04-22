@@ -13,15 +13,15 @@
         //$locationProvider.html5Mode(true);
 
         $routeProvider.when('/', {
-            templateUrl: 'app/views/home.html'
+            templateUrl: 'app/core/templates/home.html'
         });
 
         $routeProvider.when('/about', {
-            templateUrl: 'app/views/about.html'
+            templateUrl: 'app/core/templates/about.html'
         });
 
         $routeProvider.when('/settings', {
-            templateUrl: 'app/views/settings.html'
+            templateUrl: 'app/core/templates/settings.html'
         });
 
         $routeProvider.otherwise({ redirectTo: '/' });
@@ -76,29 +76,6 @@
 
         function isLoggedIn() {
             return !!ref.getAuth();
-        }
-    }
-})();
-(function () {
-    'use strict';
-
-    angular.module('app').factory('todoService', todoService);
-
-    todoService.$inject = ['$firebaseArray', 'FIREBASE_URL'];
-
-    function todoService($firebaseArray, FIREBASE_URL) {
-        var ref = new Firebase(FIREBASE_URL);
-        var authData = ref.getAuth();
-        var todosRef = new Firebase(FIREBASE_URL + '/users/' + authData.uid + '/todos');
-
-        var todoService = {
-            getTodosRef: getTodosRef
-        };
-
-        return todoService;
-
-        function getTodosRef() {
-            return $firebaseArray(todosRef);;
         }
     }
 })();
@@ -183,6 +160,29 @@
 (function () {
     'use strict';
 
+    angular.module('app').factory('todoService', todoService);
+
+    todoService.$inject = ['$firebaseArray', 'FIREBASE_URL'];
+
+    function todoService($firebaseArray, FIREBASE_URL) {
+        var ref = new Firebase(FIREBASE_URL);
+        var authData = ref.getAuth();
+        var todosRef = new Firebase(FIREBASE_URL + '/users/' + authData.uid + '/todos');
+
+        var todoService = {
+            getTodosRef: getTodosRef
+        };
+
+        return todoService;
+
+        function getTodosRef() {
+            return $firebaseArray(todosRef);;
+        }
+    }
+})();
+(function () {
+    'use strict';
+
     angular.module('app').directive('todoItems', todoItems);
 
     function todoItems() {
@@ -192,7 +192,7 @@
             scope: {
                 items: '='
             },
-            template: ['<ul class="todo-list">', '<li ng-repeat="todo in vm.items" class="todo-list__item repeat-animation" ng-swipe-left="vm.removeTodo($index)" ng-swipe-right="vm.removeTodo($index)">', '<form ng-show="editingTodo" ng-submit="editingTodo = !editingTodo" class="input-group" novalidate>', '<input type="text" ng-model="todo.value" ng-change="vm.saveTodo(todo)" />', '<button type="submit">Save</button>', '</form>', '<div ng-hide="editingTodo">', '<div ng-click="editingTodo = !editingTodo">{{todo.value}}</div>', '<button ng-click="vm.removeTodo($index)" class="todo-list__close-btn">x</button>', '</div>', '</li>', '</ul>'].join(''),
+            templateUrl: 'app/todo/todo-list.directive.html',
             controller: TodoItemsController,
             controllerAs: 'vm',
             bindToController: true // because the scope is isolated

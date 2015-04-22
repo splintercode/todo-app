@@ -14,15 +14,15 @@
         //$locationProvider.html5Mode(true);
 
         $routeProvider.when('/', {
-            templateUrl: 'app/views/home.html'
+            templateUrl: 'app/core/templates/home.html'
         });
 
         $routeProvider.when('/about', {
-            templateUrl: 'app/views/about.html'
+            templateUrl: 'app/core/templates/about.html'
         });
 
         $routeProvider.when('/settings', {
-            templateUrl: 'app/views/settings.html'
+            templateUrl: 'app/core/templates/settings.html'
         });
 
         $routeProvider.otherwise({ redirectTo: '/' });
