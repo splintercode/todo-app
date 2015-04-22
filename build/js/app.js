@@ -4,7 +4,7 @@
     'use strict';
 
     var app = angular.module('app', ['ngRoute', 'ngTouch',
-    //'ngAnimate',
+    //'ngAnimate',  commented out because of current bug in 1.4 r0
     'firebase']);
 
     app.constant('FIREBASE_URL', 'https://todo-app-core.firebaseio.com');
@@ -28,9 +28,8 @@
     }]);
 
     app.run(['$rootScope', '$location', 'authService', function ($rootScope, $location, authService) {
-        $rootScope.$on('$routeChangeStart', function (event, next, current) {
+        $rootScope.$on('$routeChangeStart', function () {
             if (!authService.isLoggedIn()) {
-                //event.preventDefault();
                 $location.path('/');
                 console.log('Route Unauthenticated');
             } else {
@@ -67,7 +66,9 @@
                 //console.log("User " + authData.uid + " is logged in with " + authData.provider);
 
                 return authData;
-            })['catch'](function (error) {});
+            })['catch'](function (error) {
+                return console.log('Authentication failed:', error);
+            });
         }
 
         function logout() {
@@ -102,18 +103,18 @@
         function login(provider) {
             authService.login(provider).then(function (authData) {
                 setLoggedInInfo(authData);
-                $location.path('/todos');
+                $location.path('/');
             })['catch'](function (error) {
-                console.log('Authentication failed:', error);
+                return console.log('Authentication failed:', error);
             });
         }
 
         function logout() {
+            $location.path('/');
             authService.logout();
+
             vm.provider = 'Not logged in';
             vm.isAuthenticated = false;
-
-            $location.path('/');
         }
 
         function setLoggedInInfo(authData) {
@@ -128,18 +129,18 @@
         }
 
         $rootScope.$on('$locationChangeStart', function () {
-            vm.showNav = false;
+            return vm.showNav = false;
         });
     }
 })();
 (function () {
     'use strict';
 
-    angular.module('app').controller('TodoCtrl', TodoCtrl);
+    angular.module('app').controller('TodoController', TodoController);
 
-    TodoCtrl.$inject = ['todoService'];
+    TodoController.$inject = ['todoService'];
 
-    function TodoCtrl(todoService) {
+    function TodoController(todoService) {
         var vm = this;
 
         vm.todos = todoService.getTodosRef();
@@ -176,7 +177,7 @@
         return todoService;
 
         function getTodosRef() {
-            return $firebaseArray(todosRef);;
+            return $firebaseArray(todosRef);
         }
     }
 })();
@@ -211,12 +212,10 @@
             }
 
             function saveTodo(todo) {
-                vm.items.$save(todo).then(function () {});
+                vm.items.$save(todo).then(function (data) {
+                    return console.log(data);
+                });
             }
         }
     }
 })();
-
-//console.log("Authentication failed:", error);
-
-// data has been saved to Firebase

@@ -9,7 +9,7 @@
     <button type="button" ng-hide="base.isAuthenticated" ng-click="base.login('facebook')" class="full-width">Login With Facebook</button><br />
 </section>
 
-<section ng-if="base.isAuthenticated" ng-controller="TodoCtrl as todo">
+<section ng-if="base.isAuthenticated" ng-controller="TodoController as todo">
     <h1>Todos</h1>
 
     <form name="todoForm" ng-submit="todo.addTodo(todoForm.$valid)" novalidate class="input-group">

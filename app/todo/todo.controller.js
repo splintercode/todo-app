@@ -3,11 +3,11 @@
 
     angular
         .module('app')
-        .controller('TodoCtrl', TodoCtrl);
+        .controller('TodoController', TodoController);
 
-    TodoCtrl.$inject = ['todoService'];
+    TodoController.$inject = ['todoService'];
 
-    function TodoCtrl(todoService) {
+    function TodoController(todoService) {
         let vm = this;
 
         vm.todos = todoService.getTodosRef();
