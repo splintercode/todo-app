@@ -27,13 +27,11 @@
             vm.saveTodo = saveTodo;
 
             function removeTodo($index) {
-                vm.items.$remove($index)
+                vm.items.$remove($index);
             }
 
             function saveTodo(todo) {
-                vm.items.$save(todo).then(function() {
-                    // data has been saved to Firebase
-                });
+                vm.items.$save(todo).then(data => console.log(data));
             }
         }
     }

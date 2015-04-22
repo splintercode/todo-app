@@ -23,18 +23,16 @@
         function login(provider) {
             authService.login(provider).then(function(authData) {
                 setLoggedInInfo(authData);
-                $location.path('/todos');
-            }).catch(function(error) {
-                console.log("Authentication failed:", error);
-            });
+                $location.path('/');
+            }).catch(error => console.log('Authentication failed:', error));
         }
 
         function logout() {
+            $location.path('/');
             authService.logout();
+
             vm.provider = 'Not logged in';
             vm.isAuthenticated = false;
-
-            $location.path('/');
         }
 
         function setLoggedInInfo(authData) {
@@ -48,8 +46,6 @@
             vm.showNav = !vm.showNav;
         }
 
-        $rootScope.$on("$locationChangeStart",function(){
-            vm.showNav = false;
-        });
+        $rootScope.$on("$locationChangeStart", () => vm.showNav = false);
     }
 }());

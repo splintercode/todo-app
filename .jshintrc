@@ -86,6 +86,7 @@
     "globals"       : {
       "angular": false,
       "module": true,
+      "Firebase": true,
 
       // Jasmine Globals
       "if": true,

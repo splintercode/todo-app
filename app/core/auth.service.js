@@ -28,9 +28,7 @@
                 //console.log("User " + authData.uid + " is logged in with " + authData.provider);
 
                 return authData;
-            }).catch(function(error) {
-                //console.log("Authentication failed:", error);
-            });
+            }).catch(error => console.log('Authentication failed:', error));
         }
 
         function logout() {

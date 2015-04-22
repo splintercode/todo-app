@@ -19,7 +19,7 @@
         return todoService;
 
         function getTodosRef() {
-            return $firebaseArray(todosRef);;
+            return $firebaseArray(todosRef);
         }
     }
 }());

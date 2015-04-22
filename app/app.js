@@ -1,10 +1,10 @@
-﻿(function () {
+﻿(function() {
     'use strict';
 
     let app = angular.module('app', [
         'ngRoute',
         'ngTouch',
-        //'ngAnimate',
+        //'ngAnimate',  commented out because of current bug in 1.4 r0
         'firebase'
     ]);
 
@@ -25,16 +25,15 @@
             templateUrl: 'app/core/templates/settings.html'
         });
 
-        $routeProvider.otherwise({ redirectTo: '/' });
+        $routeProvider.otherwise({redirectTo: '/'});
     }]);
 
-    app.run(['$rootScope', '$location', 'authService', function ($rootScope, $location, authService) {
-        $rootScope.$on('$routeChangeStart', function (event, next, current) {
+    app.run(['$rootScope', '$location', 'authService', function($rootScope, $location, authService) {
+        $rootScope.$on('$routeChangeStart', function() {
             if (!authService.isLoggedIn()) {
-                //event.preventDefault();
                 $location.path('/');
                 console.log('Route Unauthenticated');
-            }  else {
+            } else {
                 console.log('Route Authenticated');
             }
         });
