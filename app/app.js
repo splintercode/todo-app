@@ -4,7 +4,7 @@
     let app = angular.module('app', [
         'ngRoute',
         'ngTouch',
-        //'ngAnimate',  commented out because of current bug in 1.4 r0
+        'ngAnimate',
         'firebase'
     ]);
 

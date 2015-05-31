@@ -3,9 +3,7 @@
 (function () {
     'use strict';
 
-    var app = angular.module('app', ['ngRoute', 'ngTouch',
-    //'ngAnimate',  commented out because of current bug in 1.4 r0
-    'firebase']);
+    var app = angular.module('app', ['ngRoute', 'ngTouch', 'ngAnimate', 'firebase']);
 
     app.constant('FIREBASE_URL', 'https://todo-app-core.firebaseio.com');
 
